@@ -3,7 +3,7 @@ body {
     background-color: #9f4467;
   }
   
-  h1 {
+  .weatherApp h1 {
     color: #9f4467;
     font-size: 24px;
     font-weight: 400;
@@ -79,3 +79,20 @@ body {
     background-color: rgb(27, 128, 146);
   }
   
+  footer > h5, a {
+    font-size: 16px;
+    padding-left: 30px;
+    margin: 30px auto;
+    color: #eedacd;
+  }
+
+  footer > h5 > a {
+    color: #dadde1;
+    text-decoration: underline;
+  }
+
+  footer > h5 > a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+    font-size: 18px;
+  }
