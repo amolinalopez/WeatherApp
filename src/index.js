@@ -83,5 +83,5 @@ function formatDate(date) {
   let currentLocationButton = document.querySelector("#current-location-button");
   currentLocationButton.addEventListener("click", getCurrentLocation);
   
-  searchCity("New York");
+  searchCity("Paris");
   
