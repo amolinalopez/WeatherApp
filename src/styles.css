@@ -61,6 +61,7 @@ body {
     color: #fceade;
     text-align: center;
     padding-left: 8px;
+    border: none;
   }
   
   #city-input {
