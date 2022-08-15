@@ -60,11 +60,12 @@ body {
   }
   
   .btn {
-    background-color: #1c0118;
+    background-color: #7c3c5b;
     color: #fceade;
     text-align: center;
     padding-left: 8px;
     border: none;
+    opacity: 90%;
   }
   
   #city-input {
