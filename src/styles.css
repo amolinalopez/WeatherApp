@@ -49,6 +49,11 @@ body {
     font-weight: 400;
     line-height: 1;
   }
+
+  .float-left{
+    /* border: #575757 solid ; */
+    padding-top: 15px;
+  }
   
   .units {
     position: relative;
@@ -78,7 +83,10 @@ body {
     background-color: #c46c8d;
     color: white;
   }
-  
+  #current-location-button{
+    font-size: 18px;
+  }
+
   #current-location-button:hover {
     background-color: rgb(27, 128, 146);
   }
@@ -107,3 +115,13 @@ body {
     text-decoration: underline;
     font-size: 18px;
   }
+
+  #icon {
+    /* border: #575757 solid ; */
+    background-color:#b4dddb;
+    border-radius: 50px;
+    margin-left: 20px;
+    width: 100px;
+  }
+
+  
