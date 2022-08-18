@@ -112,7 +112,6 @@ fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 let celsiusLink = document.querySelector(".celsiusLink");
 celsiusLink.addEventListener("click", showCelsiusTemp);
 
-
 searchCity("Paris");
 
 
@@ -137,3 +136,5 @@ function timeDifferentGreetings(hour) {
       break;
   }
 }
+
+
