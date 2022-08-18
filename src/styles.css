@@ -69,6 +69,10 @@ body {
     top: -30px;
   }
 
+  .weather-temp a {
+    color: rgb(178, 178, 178);
+  }
+
   .weather-temp .active {
     color: rgb(0, 0, 0);
     font-family: 'Courier New', Courier, monospace;
