@@ -1,111 +1,123 @@
 function formatDate(date) {
-    let hours = date.getHours();
-    if (hours < 10) {
-      hours = `0${hours}`;
-    }
-    let minutes = date.getMinutes();
-    if (minutes < 10) {
-      minutes = `0${minutes}`;
-    }
-  
-    let dayIndex = date.getDay();
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
-    let day = days[dayIndex];
-  
-    return `${day} ${hours}:${minutes}`;
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
   }
-  
-  function displayWeatherCondition(response) {
-    console.log(response.data);
-    
-    //icon element switch depends on weather
-    let iconElement = document.querySelector("#icon")
-    iconElement.setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-      );
-      iconElement.setAttribute(
-        "alt",
-        response.data.weather[0].description
-      )
-      console.log(response.data.weather[0].description)
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
 
-      
-    document.querySelector("#city").innerHTML = response.data.name;
-    document.querySelector("#temperature").innerHTML = Math.round(
-      response.data.main.temp
-    );
-  
-    document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-    document.querySelector("#wind").innerHTML = Math.round(
-      response.data.wind.speed
-    );
-    document.querySelector("#description").innerHTML =
-      response.data.weather[0].main;
-  }
-  
-  function searchCity(city) {
-    let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(displayWeatherCondition);
-  }
-  
-  function handleSubmit(event) {
-    event.preventDefault();
-    let city = document.querySelector("#city-input").value;
-    searchCity(city);
-  }
-  
-  function searchLocation(position) {
-    let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
-  
-    axios.get(apiUrl).then(displayWeatherCondition);
-  }
-  
-  function getCurrentLocation(event) {
-    event.preventDefault();
-    navigator.geolocation.getCurrentPosition(searchLocation);
-  }
-  
-  function convertToFahrenheit(event) {
-    event.preventDefault();
-    let temperatureElement = document.querySelector("#temperature");
-    temperatureElement.innerHTML = 66;
-  }
-  
-  function convertToCelsius(event) {
-    event.preventDefault();
-    let temperatureElement = document.querySelector("#temperature");
-    temperatureElement.innerHTML = 19;
-  }
-  
-  let dateElement = document.querySelector("#date");
-  let currentTime = new Date();
-  dateElement.innerHTML = formatDate(currentTime);
-  
-  let searchForm = document.querySelector("#search-form");
-  searchForm.addEventListener("submit", handleSubmit);
-  
-  let currentLocationButton = document.querySelector("#current-location-button");
-  currentLocationButton.addEventListener("click", getCurrentLocation);
-  
-  searchCity("Paris");
-  
+  let dayIndex = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[dayIndex];
 
-  //Switch Greetings
+  return `${day} ${hours}:${minutes}`;
+}
+
+function displayWeatherCondition(response) {
+  console.log(response.data);
+
+  //icon element switch depends on weather
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+  console.log(response.data.weather[0].description);
+
+  celsiusTemperature = response.data.main.temp;
+
+  document.querySelector("#city").innerHTML = response.data.name;
+  document.querySelector(".temperature").innerHTML =
+    Math.round(celsiusTemperature);
+
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+  document.querySelector("#wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
+  document.querySelector("#description").innerHTML =
+    response.data.weather[0].main;
+}
+
+function searchCity(city) {
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeatherCondition);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#city-input").value;
+  searchCity(city);
+}
+
+function searchLocation(position) {
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayWeatherCondition);
+}
+
+function getCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
+
+let dateElement = document.querySelector("#date");
+let currentTime = new Date();
+dateElement.innerHTML = formatDate(currentTime);
+
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", handleSubmit);
+
+let currentLocationButton = document.querySelector("#current-location-button");
+currentLocationButton.addEventListener("click", getCurrentLocation);
 
 
-  const todayFullDate = new Date();
-  timeDifferentGreetings(todayFullDate.getHours());
+//Temperature change
+function showFahrenheitTemp(event) {
+  event.preventDefault();
+  let temperatureEl = document.querySelector(".temperature");
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureEl.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+
+function showCelsiusTemp(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+
+  let temperatureEl = document.querySelector(".temperature");
+  temperatureEl.innerHTML = Math.round(celsiusTemperature);
+}
+
+
+let fahrenheitLink = document.querySelector(".fahrenheitLink");
+fahrenheitLink.addEventListener("click", showFahrenheitTemp);
+
+let celsiusLink = document.querySelector(".celsiusLink");
+celsiusLink.addEventListener("click", showCelsiusTemp);
+
+
+searchCity("Paris");
+
+
+//Switch Greetings
+timeDifferentGreetings(currentTime.getHours());
 
 function timeDifferentGreetings(hour) {
   const greeting = document.querySelector("#greetings");
@@ -115,13 +127,13 @@ function timeDifferentGreetings(hour) {
       greeting.textContent = "Rise and shine ✨ ";
       break;
     case hour >= 12 && hour < 18:
-      greeting.textContent = "Good afternoon ☀️ ";
+      greeting.textContent = "Good afternoon 🌕 ";
       break;
     case hour < 23:
-      greeting.textContent = "Evening 🌘 ";
+      greeting.textContent = "Good evening 🌘 ";
       break;
     default:
-      greeting.textContent = "Time for bed 😴 ";
+      greeting.textContent = "Time for bed 🌑 ";
       break;
   }
 }

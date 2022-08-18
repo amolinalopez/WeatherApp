@@ -24,6 +24,12 @@ body {
     line-height: 28px;
     margin: 0;
   }
+
+  #greetings{
+    margin-bottom: 20px;
+    text-decoration: underline 1px #9f4467;
+    text-underline-offset: 10px;
+  }
   
   ul {
     margin: 0 0 10px;
@@ -57,22 +63,33 @@ body {
     /* border: #575757 solid ; */
     padding-top: 15px;
   }
-  
+
   .units {
     position: relative;
     top: -30px;
   }
 
-  .units > a {
-    color: rgb(71, 71, 71);
+  /* .units > a {
+    color: pink;
     font-size: 18px;
-  }
+  } */
+ 
+  .weather-temp .active {
+    color: rgb(75, 43, 43);
+    font-family: 'Courier New', Courier, monospace;
+    cursor: default;
+  } 
 
-  a:hover {
-    font-size: 22px;
+  .weather-temp .active:hover {
+    text-decoration: none;
+  }
+  
+ 
+
+  /* a:hover {
     color: rgb(0, 0, 0);
 text-decoration: none;
-  }
+  } */
   
   .search-form {
     margin-bottom: 20px;
